@@ -1,74 +1,88 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ola esse e meu git hub , seja bem vindo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <title>Gabriel - Estudante de Informática</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: #fff;
-      text-align: center;
-      padding: 2rem;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #2a2a4d);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      animation: fadeInUp 2s ease;
     }
 
-    h2 {
-      color: #00ffe1;
-      margin-bottom: 2rem;
-    }
-
-    p {
-      max-width: 600px;
-      margin: auto;
-      font-size: 1.2rem;
-      line-height: 1.6;
-    }
-
-    a {
-      color: #00ffe1;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .socials {
-      margin-top: 2rem;
-    }
-
-    .socials a {
-      margin: 0 10px;
+    .typewriter {
+      border-right: 2px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 3s steps(30, end) forwards, blink 0.7s step-end infinite;
       font-size: 1.5rem;
     }
 
-    .emoji {
-      font-size: 2rem;
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 320px }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background-color: #5b6eff;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      animation: fadeInUp 3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      background-color: #3a49d9;
     }
   </style>
 </head>
 <body>
-  <div class="emoji">👨‍💻💥</div>
-  <h1>Ola! Sou o Gabriel</h1>
-  <h2>Estudante de Informática e entusiasta da tecnologia 🐛⚒️</h2>
-  <p>
-    Seja muito bem-vindo(a) ao meu espaço no GitHub! Aqui compartilho projetos, ideias criativas e aprendizados adquiridos ao longo da minha jornada como estudante de informática.
-  </p>
-  <p>
-    Estou em constante evolução, explorando tecnologias como HTML, CSS, JavaScript e Python. Busco sempre aprimorar minhas habilidades e contribuir com soluções inovadoras — com café, esforço e, às vezes, um pouco de sorte no debugging.
-  </p>
+  <h1>Olá, eu sou o Gabriel! 👋</h1>
+  <div class="typewriter">Estudante de Informática 💻</div>
 
-  <div class="socials">
-    <a href="https://github.com/seu-usuario" target="_blank">🐙 GitHub</a>
-    <a href="https://linkedin.com/in/seu-linkedin" target="_blank">💼 LinkedIn</a>
-    <a href="mailto:seuemail@email.com">📧 Email</a>
-  </div>
+  <a href="https://github.com/SEU_USUARIO_AQUI" target="_blank">
+    <button class="button">Veja meu GitHub</button>
+  </a>
 
-  <p style="margin-top: 3rem; font-size: 0.9rem; opacity: 0.7;">Desenvolvido com 💻, café ☕ e alguns bugs que viraram aprendizado.</p>
+  <script>
+    // Você pode adicionar mais interações aqui futuramente
+    // Exemplo: animação com partículas, ou um modo escuro
+  </script>
 </body>
 </html>
+
