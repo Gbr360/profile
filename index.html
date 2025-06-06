@@ -2,34 +2,86 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Gabriel - Estudante de Informática</title>
+  <title>Gabriel | Estudante de Informática</title>
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1e1e2f, #2a2a4d);
+      overflow: hidden;
+      background: #0e0e2c;
       color: white;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      overflow: hidden;
+      text-align: center;
+      height: 100%;
+      padding: 20px;
+      animation: fadeIn 2s ease-out;
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      animation: fadeInUp 2s ease;
+      font-size: 3rem;
+      margin-bottom: 10px;
     }
 
     .typewriter {
-      border-right: 2px solid white;
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      border-right: 2px solid #fff;
       white-space: nowrap;
       overflow: hidden;
       width: 0;
-      animation: typing 3s steps(30, end) forwards, blink 0.7s step-end infinite;
-      font-size: 1.5rem;
+      animation: typing 3s steps(30, end) forwards, blink 0.7s infinite;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      padding: 12px 24px;
+      background: #4b6fff;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .button:hover {
+      background: #2e4de0;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes typing {
@@ -40,49 +92,90 @@
     @keyframes blink {
       50% { border-color: transparent; }
     }
-
-    @keyframes fadeInUp {
-      from {
-        transform: translateY(40px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .button {
-      margin-top: 30px;
-      padding: 12px 24px;
-      background-color: #5b6eff;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
-      animation: fadeInUp 3s ease;
-    }
-
-    .button:hover {
-      transform: scale(1.1);
-      background-color: #3a49d9;
-    }
   </style>
 </head>
 <body>
-  <h1>Olá, eu sou o Gabriel! 👋</h1>
-  <div class="typewriter">Estudante de Informática 💻</div>
+  <canvas id="bgCanvas"></canvas>
 
-  <a href="https://github.com/SEU_USUARIO_AQUI" target="_blank">
-    <button class="button">Veja meu GitHub</button>
-  </a>
+  <div class="container">
+    <h1>Olá, eu sou o Gabriel! 👋</h1>
+    <div class="typewriter">Estudante de Informática 💻</div>
 
+    <div class="buttons">
+      <a href="https://github.com/SEU_USUARIO_GITHUB" target="_blank">
+        <button class="button">Meu GitHub</button>
+      </a>
+      <a href="#sobre">
+        <button class="button">Sobre Mim</button>
+      </a>
+      <a href="#projetos">
+        <button class="button">Projetos</button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Animação de fundo com partículas (canvas simples) -->
   <script>
-    // Você pode adicionar mais interações aqui futuramente
-    // Exemplo: animação com partículas, ou um modo escuro
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+    const colors = ['#5b6eff', '#ffffff', '#4fc3f7', '#81d4fa'];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      for (let i = 0; i < 100; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    initParticles();
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
   </script>
 </body>
 </html>
+
 
